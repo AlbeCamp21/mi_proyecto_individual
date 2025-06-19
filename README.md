@@ -14,6 +14,19 @@ Para este proyecto, me encargué de la creación de algunas *issues* para cada *
 
 ### Instrucciones
 
+Todos los comandos funcionan únicamente en sistemas basados en Linux, como Ubuntu, Debian, Fedora, etc.
+
+**Herramientas necesarias**
+
+```bash
+$ cd ~
+$ sudo apt install shellcheck
+$ curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+$ sudo apt install jq
+```
+
+**Ejecución**
+
 ```bash
 $ git clone https://github.com/AlbeCamp21/mi_proyecto_individual.git
 $ cd mi_proyecto_individual
@@ -27,12 +40,13 @@ $ cd facade/
 $ terraform init
 $ terraform apply -auto-approve
 # Probar módulo Mediator
+$ cd ..
 $ cd mediator/
 $ terraform init
 $ terraform apply -auto-approve
 ```
 
-> Se tuvieron que modificar algunas dependencias del módulo Facade hacía el módulo Adapter, debido a que dicho módulo lo elaboró otro miembro del grupo.
+> Se tuvieron que eliminar algunas dependencias del módulo Facade hacía el módulo Adapter, debido a que dicho módulo lo elaboró otro miembro del grupo.
 
 
 
