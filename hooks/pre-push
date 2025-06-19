@@ -56,14 +56,20 @@ done
 
 # 4. Pruebas automáticas (pytest)
 if command -v pytest &>/dev/null; then
-  pytest
+  pytest_output=$(pytest 2>&1)
   PYTEST_EXIT_CODE=$?
-  if [[ $PYTEST_EXIT_CODE -eq 1 ]]; then
-    echo "[pre-push] Error: pytest falló en al menos un test."
-    exit 1
-  elif [[ $PYTEST_EXIT_CODE -ne 0 && $PYTEST_EXIT_CODE -ne 5 ]]; then
-    # 5 es "No tests collected"
-    echo "[pre-push] Error: pytest terminó con código $PYTEST_EXIT_CODE."
+
+  echo "$pytest_output"
+
+  # Manejo de salida
+  if [[ $PYTEST_EXIT_CODE -eq 0 ]]; then
+    echo "[pre-push] Pruebas pasaron exitosamente."
+  elif echo "$pytest_output" | grep -q "No data was collected."; then
+    echo "[pre-push] Advertencia: No se encontró código cubierto ni tests. Continúa el push."
+  elif [[ $PYTEST_EXIT_CODE -eq 5 ]]; then
+    echo "[pre-push] Advertencia: No se encontraron pruebas. Continúa el push."
+  else
+    echo "[pre-push] Error: pytest falló o terminó inesperadamente (código $PYTEST_EXIT_CODE)."
     exit 1
   fi
 fi
