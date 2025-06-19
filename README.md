@@ -18,10 +18,17 @@ Todos los comandos funcionan únicamente en sistemas basados en Linux, como Ubun
 
 **Herramientas necesarias**
 
+Se necesitan las herramientas: `shellcheck`, `tflint` y `jq`.
+
+En caso de ya tener instalada alguna de estas, ignorar su respectivo comando para instalación.
+
 ```bash
 $ cd ~
+# shellcheck
 $ sudo apt install shellcheck
+# tflint
 $ curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+# jq
 $ sudo apt install jq
 ```
 
